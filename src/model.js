@@ -3,16 +3,13 @@
 // of visualization which are done in viz.js
 
 import param from "./parameters.js"
-import {each,range,map,mean} from "lodash-es"
+import {each,range,map,mean,max,min} from "lodash-es"
 import {rad2deg,deg2rad} from "./utils"
+import {square as sq} from "lattices"
 
-const L = param.L;
-const dt = param.dt;
-
-// typically objects needed for the explorable
-// are defined here
 
 var agents = [];
+var N;
 
 // the initialization function, this is bundled in simulation.js with the initialization of
 // the visualization and effectively executed in index.js when the whole explorable is loaded
@@ -23,16 +20,20 @@ const initialize = () => {
 	param.timer={}; param.tick=0;
 
 	// make agents
-
-	const N = param.number_of_particles.choices[param.number_of_particles.widget.value()];
 	
-	agents = map(range(N), i => { return {
-				index:i, 
-				x:L*Math.random(), 
-				y:L*Math.random(),
-				theta: 2*Math.PI*Math.random(),
-			} 
-	});
+	const N = param.system.widget.value()==0 ? param.N_pins : param.N_patches;
+
+	const s = sq(N).boundary("periodic");
+
+//	const N = param.number_of_particles.choices[param.number_of_particles.widget.value()];
+	
+	agents = s.nodes;
+	
+	each(agents,a=>{
+		a.theta = 2*Math.PI*Math.random();
+	})
+	
+	console.log(agents)
 	
 };
 
@@ -45,32 +46,18 @@ const go  = () => {
 	param.tick++;
 	
 	each(agents,a=>{
-		
-		var dx = dt*param.speed.widget.value()*Math.cos(a.theta);
-		var dy = dt*param.speed.widget.value()*Math.sin(a.theta);
-		
-		const x_new = a.x + dx;
-		const y_new = a.y + dy;
-		
-		if (x_new < 0) {dx+=L};
-		if (y_new < 0) {dy+=L};
-		if (x_new > L) {dx-=L};
-		if (y_new > L) {dy-=L};  
-		
-		a.x += dx;
-		a.y += dy;
-		
-		var neighbors = agents.filter(d =>  (d.x-a.x)**2 + (d.y-a.y)**2 <= param.interaction_radius.widget.value()**2 )
-		
-		var mx = mean(map(neighbors,x=> Math.cos(deg2rad(x.theta))));
-		var my = mean(map(neighbors,x=> Math.sin(deg2rad(x.theta))));	
-		
-		a.theta = rad2deg(Math.atan2(my,mx))
-		
-		a.theta += deg2rad(param.wiggle.widget.value())*(Math.random()-0.5)
-		
+		const xn = mean(map(a.neighbors,x=> Math.cos(x.theta)));
+		const yn = mean(map(a.neighbors,x=> Math.sin(x.theta)));	
+		const x0 = Math.cos(a.theta)
+		const y0 = Math.sin(a.theta)
+		a.x_new = x0 + param.dt * (xn-x0)
+		a.y_new = y0 + param.dt * (yn-y0)
+
 	})
 	
+	 each(agents,a=>{
+	 	a.theta=Math.atan2(a.y_new,a.x_new);
+	 })
 }
 
 // the update function is usually not required for running the explorable. Sometimes
@@ -79,7 +66,7 @@ const go  = () => {
 
 const update = () => {
 	
-	each(agents,x => {x.active = x.index < param.number_of_particles.widget.value() ? true : false})
+	//each(agents,x => {x.active = x.index < param.number_of_particles.widget.value() ? true : false})
 
 }
 

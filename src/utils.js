@@ -1,7 +1,7 @@
 // this is just a collection of utility functions that are frequently used in some explorables
 
 import * as d3 from "d3"
-import {map, replace, capitalize, each, has, isBoolean, pickBy, toPairs } from "lodash-es"
+import {map, replace, capitalize, each, has, isBoolean, pickBy, toPairs,mean,meanBy } from "lodash-es"
 
 const add_id_label = (x) => map(toPairs(x), d => {d[1]["id"]=d[0]; d[1]["label"]=replace(capitalize(d[0]),/_/g," ")} );
 
@@ -21,5 +21,6 @@ const dist = (a,b) => {
 	const dy = (a.y-b.y);
 	return Math.sqrt(dx*dx + dy*dy);
 }
+
 
 export {toArray,add_id_label,add_widget,get_variables,get_booleans,get_choices,deg2rad,rad2deg,dist}

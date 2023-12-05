@@ -11,3 +11,13 @@
 	stroke: black;
 	stroke-width: 1px;
 }
+
+.display-panel .pin {
+	stroke:black;
+	stroke-width: 3px;
+	stroke-linecap:round;
+}
+
+.display-panel .patch {
+	stroke-width: 0.5px;
+}
