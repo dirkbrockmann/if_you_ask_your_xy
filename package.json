@@ -1,7 +1,7 @@
 {
   "name": "@explorables/if_you_ask_your_xy",
   "title": "If you ask your XY",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The XY model of statistical mechanics - Self-organization of spatially arranged magnets",
   "repository": {
     "type": "git",
