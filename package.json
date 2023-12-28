@@ -2,7 +2,7 @@
   "name": "@explorables/if_you_ask_your_xy",
   "title": "If you ask your XY",
   "subtitle": "The XY-model of statistical mechanics",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "The XY model is a key model of statistical mechanics. Among other things, it describes self-organization of spatially arranged magnets but also concepts like opinion dynamics in social systems.",
   "repository": {
     "type": "git",

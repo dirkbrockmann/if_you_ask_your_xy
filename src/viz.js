@@ -76,7 +76,7 @@ const go = (display,config) => {
 	
 	if(param.system.widget.value()==0){
 		
-		d3.select("#origin").selectAll("."+styles.pin)
+		display.select("#origin").selectAll("."+styles.pin)
 			.attr("d",d=>line(
 				[
 					{x:(d.x-cfg.simulation.pin_size/M*Math.cos(d.theta)),y:(d.y-cfg.simulation.pin_size/M*Math.sin(d.theta))},
@@ -84,7 +84,7 @@ const go = (display,config) => {
 				]
 			))
 	} else {
-		d3.selectAll("#origin").selectAll("."+styles.patch)
+		display.selectAll("#origin").selectAll("."+styles.patch)
 			.style("fill",d=>paint((d.theta+Math.PI)/(2*Math.PI)))
 			.style("stroke",d=>paint((d.theta+Math.PI)/(2*Math.PI)))
 	}
