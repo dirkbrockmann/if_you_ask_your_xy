@@ -1,0 +1,9 @@
+.pin {
+	stroke:black;
+	stroke-width: 3px;
+	stroke-linecap:round;
+}
+
+.patch {
+	stroke-width: 0.5px;
+}

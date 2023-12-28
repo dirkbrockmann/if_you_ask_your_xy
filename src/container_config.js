@@ -3,10 +3,11 @@
 // be passed to the load() method defined in index.js.
 
 export default {
+	id:"if_you_ask_your_XY",
 	display_type:"svg", // either svg or canvas depending on explorable
 	debug:false,  // if set to true, draws dots on the control panel to help widget placement
-	controls_border:false,
-	display_border:true,
+	controls_border:"",
+	display_border:"1px solid black",
 	debug_lattice:"debug-grid-16",
 	controls_grid:{nx:12,ny:12},
 	display_size: {width:500,height:500},

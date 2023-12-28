@@ -10,7 +10,7 @@ import param from "./parameters.js"
 import {agents} from "./model.js"
 import cfg from "./config.js"
 import colors from "./colormaps.js"
-
+import styles from "./styles.module.css"
 
 const X = d3.scaleLinear().domain([-0.5,0.5]);
 const Y = d3.scaleLinear().domain([-0.5,0.5]);
@@ -41,7 +41,6 @@ const initialize = (display,config) => {
 	
 	const origin = display.append("g").attr("id","origin")		
 	
-	
 	if(param.system.widget.value()==0){
 	
 		origin.selectAll(".pivot").data(agents).enter().append("circle")		
@@ -50,7 +49,7 @@ const initialize = (display,config) => {
 			.attr("cx",d=>X(d.x))
 			.attr("cy",d=>Y(d.y))
 	
-		origin.selectAll(".pin").data(agents).enter().append("path").attr("class","pin")
+		origin.selectAll("."+styles.pin).data(agents).enter().append("path").attr("class",styles.pin)
 		.attr("d",d=>line(
 			[
 				{x:(d.x-cfg.simulation.pin_size/M*Math.cos(d.theta)),y:(d.y-cfg.simulation.pin_size/M*Math.sin(d.theta))},
@@ -58,8 +57,8 @@ const initialize = (display,config) => {
 			]
 		))
 	} else {
-		origin.selectAll(".patch").data(agents).enter().append("path")
-			.attr("class","patch")
+		origin.selectAll("."+styles.patch).data(agents).enter().append("path")
+			.attr("class",styles.patch)
 			.attr("d",d=>line(d.cell()))
 			.style("fill",d=>paint((d.theta+Math.PI)/(2*Math.PI)))
 			.style("stroke",d=>paint((d.theta+Math.PI)/(2*Math.PI)))
@@ -77,7 +76,7 @@ const go = (display,config) => {
 	
 	if(param.system.widget.value()==0){
 		
-		d3.select("#origin").selectAll(".pin")
+		d3.select("#origin").selectAll("."+styles.pin)
 			.attr("d",d=>line(
 				[
 					{x:(d.x-cfg.simulation.pin_size/M*Math.cos(d.theta)),y:(d.y-cfg.simulation.pin_size/M*Math.sin(d.theta))},
@@ -85,7 +84,7 @@ const go = (display,config) => {
 				]
 			))
 	} else {
-		d3.selectAll("#origin").selectAll(".patch")
+		d3.selectAll("#origin").selectAll("."+styles.patch)
 			.style("fill",d=>paint((d.theta+Math.PI)/(2*Math.PI)))
 			.style("stroke",d=>paint((d.theta+Math.PI)/(2*Math.PI)))
 	}

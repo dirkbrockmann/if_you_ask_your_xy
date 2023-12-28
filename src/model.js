@@ -33,8 +33,6 @@ const initialize = () => {
 		a.theta = 2*Math.PI*Math.random();
 	})
 	
-	console.log(agents)
-	
 };
 
 // the go function, this is bundled in simulation.js with the go function of
