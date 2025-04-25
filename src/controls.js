@@ -59,6 +59,6 @@ export default (controls,grid)=>{
 }
 
 
-export {radios,go,setup,choices}
+export {radios,go,setup,setup as reset,choices}
 
 

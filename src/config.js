@@ -18,7 +18,7 @@ export default {
 		radio_shape:"circle",
 	},
 	simulation: {
-		delay:0,
+		delay:10,
 		pin_size:0.4,
 		pivot_size:2.5,
 		colormap:"broc"
