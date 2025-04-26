@@ -4,7 +4,7 @@
   "subtitle": "The XY-model of statistical mechanics",
   "description": "The XY model is a key model of statistical mechanics. Among other things, it describes self-organization of spatially arranged magnets but also concepts like opinion dynamics in social systems.",
   "author": "Dirk Brockmann (https://synosy.github.io)",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "license": "CC-BY-4.0",
   "repository": {
     "type": "git",
